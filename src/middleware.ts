@@ -1,7 +1,7 @@
 import { authMiddleware } from "@clerk/nextjs/server";
 
 export default authMiddleware({
-  publicRoutes: ['/', '/api/create-chat'], // Add '/api/create-chat' to public routes if you don't want auth here
+  publicRoutes: ['/', '/api/create-chat','/api/get-feedback'], // Add '/api/create-chat' to public routes if you don't want auth here
 });
 
 

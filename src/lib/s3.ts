@@ -1,4 +1,4 @@
-import { PutObjectCommandOutput, S3 } from "@aws-sdk/client-s3";
+import { PutObjectCommandOutput, S3,ObjectCannedACL, PutObjectCommand  } from "@aws-sdk/client-s3";
 
 export async function uploadToS3(
   file: File
@@ -14,30 +14,44 @@ export async function uploadToS3(
       });
 
       const file_key =
-        "uploads/" + Date.now().toString() + file.name.replace(" ", "-");
+        "uploads/" + Date.now().toString() + file.name.replace(/\s+/g, "-");
 
       const params = {
         Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME!,
         Key: file_key,
         Body: file,
+        // ACL: "public-read" as ObjectCannedACL, 
       };
-      s3.putObject(
-        params,
-        (err: any, data: PutObjectCommandOutput | undefined) => {
-          return resolve({
-            file_key,
-            file_name: file.name,
-          });
-        }
-      );
+
+
+      const command = new PutObjectCommand(params); // 👈 Use PutObjectCommand
+
+      s3.send(command)
+        .then(() => resolve({ file_key, file_name: file.name }))
+        .catch((err) => reject(err));
     } catch (error) {
       reject(error);
     }
+
+
+
+    //   s3.putObject(
+    //     params,
+    //     (err: any, data: PutObjectCommandOutput | undefined) => {
+    //       return resolve({
+    //         file_key,
+    //         file_name: file.name,
+    //       });
+    //     }
+    //   );
+    // } catch (error) {
+    //   reject(error);
+    // }
   });
 }
 
 
 export function getS3Url(file_key:string) {
-    const url = 'https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.us-east-1.amazonaws/${file_key}';
+    const url = `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.us-east-1.amazonaws/${file_key}`;
     return url;
 } 

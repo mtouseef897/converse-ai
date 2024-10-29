@@ -24,6 +24,16 @@ export const message = pgTable('message', {
   role:userSystemEnum('role').notNull()
 });
 
+
+export const feedbacks = pgTable('feedbacks', {
+  id: serial('id').primaryKey(),
+  userId: varchar('user_id', { length: 256 }).notNull(), // Reference to the user
+  username: varchar('username', { length: 256 }).notNull(), // To store the user's name
+  profileImg: varchar('profile_img', { length: 256 }), // URL or path to the user's profile image
+  content: text('content').notNull(), // Feedback content
+  createdAt: timestamp('created_at').notNull().defaultNow(), // Timestamp for feedback submission
+});
+
 export const userSubscriptions = pgTable("user_subscriptions", {
   id: serial("id").primaryKey(),
   userId: varchar("user_id", { length: 256 }).notNull().unique(),

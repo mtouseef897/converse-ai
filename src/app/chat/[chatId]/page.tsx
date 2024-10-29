@@ -19,12 +19,12 @@ const ChatPage = async ({ params: { chatId } }: Props) => {
   if (!userId) {
     return redirect("/sign-in");
   }
-  
+
   const _chats = await db.select().from(chats).where(eq(chats.userId, userId));
   if (!_chats || !_chats.length) {
     return redirect("/");
   }
-  
+
   if (!_chats.find((chat) => chat.id === parseInt(chatId))) {
     return redirect("/");
   }
@@ -32,10 +32,11 @@ const ChatPage = async ({ params: { chatId } }: Props) => {
   const currentChat = _chats.find((chat) => chat.id === parseInt(chatId));
   // const isPro = await checkSubscription();
 
+  // console.log("PDF URL is...",currentChat?.pdfUrl);
   return (
     <div className="flex h-screen">
       {/* Chat Sidebar */}
-      <div className="flex-none w-64 max-h-screen overflow-y-auto">
+      <div className="flex-none w-72 max-h-screen overflow-y-auto">
         <ChatSideBar chats={_chats} chatId={parseInt(chatId)} isPro={false} />
       </div>
 
