@@ -38,7 +38,7 @@ const DeleteChatButton: FC<DeleteChatButtonProps> = ({
   };
 
   return (
-    <div>
+    <div className="flex-[1] flex items-center justify-center">
       <button onClick={handleDelete} disabled={loading}>
         {loading ? (
           <Oval
@@ -51,14 +51,14 @@ const DeleteChatButton: FC<DeleteChatButtonProps> = ({
             wrapperClass=""
           />
         ) : (
-          <div className="flex ">
-            <Trash className="ml-2 text-xs w-4" />
+          <span className="flex items-center justify-center">
+            <Trash className=" text-xs w-4" />
             {error && (
               <p style={{ color: "red" }}>
-                <AlertCircle className="ml-2 text-xs w-4" />
+                <AlertCircle className=" text-xs w-4" />
               </p>
             )}
-          </div>
+          </span>
         )}
       </button>
     </div>

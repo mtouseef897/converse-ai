@@ -1,5 +1,10 @@
 {
   "/api/get-messages/route": "app/api/get-messages/route.js",
   "/page": "app/page.js",
-  "/chat/[chatId]/page": "app/chat/[chatId]/page.js"
+  "/feedbacks/page": "app/feedbacks/page.js",
+  "/chat/[chatId]/page": "app/chat/[chatId]/page.js",
+  "/api/get-feedback/route": "app/api/get-feedback/route.js",
+  "/api/create-feedback/route": "app/api/create-feedback/route.js",
+  "/api/rename-chat/route": "app/api/rename-chat/route.js",
+  "/api/delete-chat/route": "app/api/delete-chat/route.js"
 }

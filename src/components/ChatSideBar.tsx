@@ -1,7 +1,7 @@
 "use client";
 import { DrizzleChat } from "@/lib/db/schema";
 import { cn } from "@/lib/utils";
-import { MessageCircle, PlusCircle, Trash } from "lucide-react";
+import { HomeIcon, MessageCircle, PlusCircle, Trash } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import DeleteChatButton from "./ui/DeleteChatButton";
@@ -35,7 +35,7 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
   };
 
   return (
-    <div className="w-full h-screen p-4 text-gray-200 bg-gray-900">
+    <div className="relative w-full h-screen p-4 text-gray-200 bg-gray-900 overflow-hidden">
       <Link href="/">
         <Button className="w-full border-dashed border-white border mb-4">
           <PlusCircle className="mr-2 w-4 h-4" />
@@ -49,7 +49,7 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
           <p className="text-gray-500">No chats available.</p>
         ) : (
           chatstoShow.map((chat) => (
-            <Link key={chat.id} href={`/chat/${chat.id}`}>
+            <Link key={chat.id} href={`/chat/${chat.id}`} className="  ">
               <div
                 className={cn(
                   "rounded-lg p-3 text-slate-300 flex items-center ",
@@ -76,7 +76,12 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
           ))
         )}
       </div>
-      <h1>home screen </h1>
+      <Link href="/" className="absolute bottom-0 left-0 right-0 mx-4">
+        <Button className="w-full border-gray-200 border mb-4 hover:bg-gray-50/[0.34] ">
+          <HomeIcon className="mr-2 w-4 h-4" />
+          Home
+        </Button>
+      </Link>
     </div>
   );
 };

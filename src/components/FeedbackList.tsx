@@ -1,5 +1,6 @@
 // FeedbackList.tsx
 
+import Link from "next/link";
 import { FC } from "react";
 
 interface Feedback {
@@ -51,6 +52,11 @@ const FeedbackList = async () => {
           </li>
         ))}
       </ul>
+      <div className="text-end mt-2">
+        <Link href="/feedbacks" className=" text-center w-[100px] p-4">
+          View All
+        </Link>
+      </div>
     </div>
   );
 };

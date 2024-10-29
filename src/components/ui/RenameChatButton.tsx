@@ -45,7 +45,7 @@ const ChatComponent: React.FC<Chat> = ({ chat, handleDeleteSuccess }) => {
   return (
     <div className="flex-1">
       {isEditing ? (
-        <div className="flex  items-center justify-center">
+        <div className="flex  items-center justify-center w-[250px] ">
           <input
             type="text"
             value={newChatName}
@@ -65,13 +65,14 @@ const ChatComponent: React.FC<Chat> = ({ chat, handleDeleteSuccess }) => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-between w-full flex-1 ">
-          <MessageCircle className="mr-2" />
-          <h3>{chat.pdfName}</h3>
-          <div className="flex items-center">
+        <div className="flex items-center justify-between w-[250px]  flex-1 gap-1 ">
+          <MessageCircle className=" flex-[0.5] !w-2" />
+          {/* <h3 className="flex-[2] overflow-hidden">test</h3> */}
+          <h3 className="flex-[2] overflow-hidden">{chat.pdfName}</h3>
+          <div className="flex items-center flex-[1]">
             <button onClick={() => setIsEditing(true)}>
               {" "}
-              <Edit className="ml-2 text-xs w-4" />
+              <Edit className=" text-xs w-4 " />
             </button>
             <DeleteChatButton
               chatId={chat.id}
